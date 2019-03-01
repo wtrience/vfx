@@ -8,7 +8,7 @@ public:
     Command();
     ~Command();
     void CommandWindows();
-    void HelpWord();
+    void Help();
     
 };
 

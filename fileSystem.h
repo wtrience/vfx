@@ -15,6 +15,7 @@ public:
     int renameFolder();
     int copyFolder();
     int pasteFolder();
+    int subPasteFolder(Folder *folder1,Folder *folder2);
     Folder* goback();
     int deleteAllFolder(Folder *Folder);
     int deleteFileInFolder();
@@ -28,6 +29,7 @@ public:
     int renameFile();
     int copyFile();
     int pasteFile();
+    int pasteFileInFolder(File file,Folder *folder);
     int showFolder();
     void display();
 
@@ -38,10 +40,6 @@ private:
     Folder * tempfolder;
 
 };
-
-
-
-
 
 #endif
 
