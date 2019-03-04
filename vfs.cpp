@@ -6,8 +6,8 @@ using namespace std;
 
 int main()
 {
-    Command command;
-    command.CommandWindows();
+	Command command;
+	command.CommandWindows();
 
-    return 0;
+	return 0;
 }
