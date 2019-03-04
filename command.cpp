@@ -31,12 +31,15 @@ void Command::CommandWindows()
 				system("cls");
 			else if (s == "dir")
 				fs.showFolder();
+			else if (s == "cd")
+				fs.openFolder();
+			else if (s == "renamedir")
+				fs.renameFolder();
 			/*
 			else if (s == "mk")
 				fs.newFile();
 
-			else if (s == "cd")
-				fs.openFolder();
+
 			
 			else if (s == "back")
 				fs.goback();
@@ -47,8 +50,7 @@ void Command::CommandWindows()
 				fs.deleteFolder();
 			else if (s == "rm")
 				fs.deleteFile();
-			else if (s == "renamedir")
-				fs.renameFolder();
+
 			else if (s == "renamefile")
 				fs.renameFile();
 			else if (s == "copydir")
@@ -80,12 +82,12 @@ void Command::CommandWindows()
 void Command::Help()
 {
 	cout<< "dir    | 列出当前目录下的目录和文件\n"
-		<< "md     | 创建目录\n"
+		<< "mkdir  | 创建目录\n"
 		<< "rd     |"
-		<< "cd     |"
-		<< "del    |"
-		<< "copy   |"
-		<< "ren    |"
+		<< "cd     | 切换当前目录"
+		<< "del    | "
+		<< "copy   | 拷贝文件"
+		<< "rename | 重命名"
 		<< "move   |"
 		<< "mklink |"
 		<< "save   |"

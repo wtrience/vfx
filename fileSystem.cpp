@@ -147,11 +147,47 @@ int FileSystem::showFolder()
 
 
 }
-////
-//Folder* FileSystem::openFolder()
-//{
 //
-//}
+Folder* FileSystem::openFolder()
+{
+	Folder *d = new Folder();
+	cin >> d->folderName;
+	int flag = 0;
+	FileSystem *fs = new FileSystem;
+
+	if (currentFolder == NULL)
+	{
+		cout << "系统找不到指定路径。" << endl;
+	}
+	else
+	{
+		if (currentFolder->folderPtr==NULL)
+		{
+			cout<<"系统找不到指定路径。"<<endl;
+		}
+		else
+		{
+			Folder *q = new Folder();
+			q = currentFolder->folderPtr;
+			while (q!=NULL)
+			{
+				if (!strcmp(d->folderName.c_str(), q->folderName.c_str()))
+				{
+					currentFolder = q;
+					flag++;
+					break;
+				}
+				q = q->nextFolder;
+			}
+
+			if (!flag)
+			{
+				cout<<"系统找不到指定路径。"<<endl;
+			}
+		}
+	}
+	return currentFolder;
+}
 ////
 //Folder* FileSystem::goback()
 //{
@@ -172,7 +208,7 @@ void FileSystem::display()
 	}
 	else
 	{
-		cout << "\nf:" << p->folderName;
+		cout << "\nH:" << p->folderName;
 		Folder *q = new Folder();
 		q = currentFolder;
 		while (q != NULL)
@@ -191,63 +227,113 @@ void FileSystem::display()
 	v.clear();
 
 }
-/*
-//
-int FileSystem::deleteFolder()
-{
-
-}
-//
-int FileSystem::deleteFileInFolder()
-{
-
-}
-
-//
-int FileSystem::deleteFile()
-{
-
-}
-//
-int FileSystem::renameFile()
-{
-
-}
 
 int FileSystem::renameFolder()
 {
+	time_t t = time(0);
+	char tmp[64];
+	strftime(tmp, sizeof(tmp), "%Y/%m/%d %X", localtime(&t));
 
+	Folder *p = new Folder();
+	cin >> p->folderName;
+	Folder *q = new Folder();
+	cin >> q->folderName;
+	int flag = 0, flag1 = 0;
+	if (currentFolder->folderPtr == NULL)
+		cout << "当前路径下不存在目录!" << endl;
+	else
+	{
+		Folder *ptr = new Folder();
+		ptr = currentFolder->folderPtr;
+		Folder *ptr1 = new Folder();
+		ptr1 = currentFolder->folderPtr;
+		while (ptr != NULL)
+		{
+			if (ptr->folderName == p->folderName)
+			{
+				flag++;
+				while (ptr1 != NULL)
+				{
+					if (ptr1->folderName == q->folderName)
+					{
+						flag1++;
+						break;
+					}
+					ptr1 = ptr1->nextFolder;
+				}
+				if (!flag1)
+				{
+					ptr->folderName = q->folderName;
+					ptr->folderAlterTime = tmp;
+				}
+				break;
+			}
+
+			ptr = ptr->nextFolder;
+		}
+
+		if (!flag)
+			cout << "不存在指定要重命名的目录!" << endl;
+		if (flag)
+		{
+			if (flag1)
+				cout << "存在一个重名文件。" << endl;
+			else
+				cout << "目录重命名成功！" << endl;
+		}
+	}
+	return 1;
 }
 
-int FileSystem::copyFile()
-{
-
-}
-
-int FileSystem::pasteFile()
-{
-
-}
-
-int FileSystem::copyFolder()
-{
-
-}
-
-int FileSystem::pasteFolder()
-{
-
-}
-
-int FileSystem::subPasteFolder(Folder *folder1, Folder *folder2)
-{
-
-}
-
-int FileSystem::pasteFileInFolder(File file, Folder *folder)
-{
-
-}
-
-*/
+//
+//int FileSystem::deleteFolder()
+//{
+//
+//}
+//
+//int FileSystem::deleteFileInFolder()
+//{
+//
+//}
+//
+//
+//int FileSystem::deleteFile()
+//{
+//
+//}
+//
+//int FileSystem::renameFile()
+//{
+//
+//}
+//
+//int FileSystem::copyFile()
+//{
+//
+//}
+//
+//int FileSystem::pasteFile()
+//{
+//
+//}
+//
+//int FileSystem::copyFolder()
+//{
+//
+//}
+//
+//int FileSystem::pasteFolder()
+//{
+//
+//}
+//
+//int FileSystem::subPasteFolder(Folder *folder1, Folder *folder2)
+//{
+//
+//}
+//
+//int FileSystem::pasteFileInFolder(File file, Folder *folder)
+//{
+//
+//}
 
