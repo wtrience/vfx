@@ -5,11 +5,11 @@
 class Command
 {
 public:
-    Command();
-    ~Command();
-    void CommandWindows();
-    void Help();
-    
+	Command();
+	~Command();
+	void CommandWindows();
+	void Help();
+
 };
 
 #endif
