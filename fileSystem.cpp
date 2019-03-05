@@ -75,13 +75,57 @@ Folder* FileSystem::newFolder()
 	return currentFolder;
 
 }
-//
-//
-////新建文件
-//int FileSystem::newFile()
-//{
-//
-//}
+
+//新建文件
+int FileSystem::newFile()
+{
+	time_t t = time(0);
+	char tmp[64];
+	strftime(tmp, sizeof(tmp), "%Y/%m/%d %X", localtime(&t));
+
+	File *p = new File();
+	cin >> p->fileName;
+	if (currentFolder != NULL)
+	{
+		//检查有无同名
+		if (currentFolder->filePtr==NULL)
+		{
+			currentFolder->filePtr = p;
+			p->fileCreateTime = tmp;
+			p->fileAlterTime = tmp;
+		}
+		else
+		{
+			File *q = new File();
+			q = currentFolder->filePtr;
+			while (q->nextFile!=NULL)
+			{
+				if (!strcmp(p->fileName.c_str(),q->fileName.c_str()))
+				{
+					cout<<"该文件已创建，无需重新创建"<<endl;
+					return 0;
+				}
+				q = q->nextFile;
+			}
+			if (!strcmp(p->fileName.c_str(), q->fileName.c_str()))
+			{
+				cout << "该文件已创建，无需重新创建" << endl;
+				return 0;
+			}
+			q->nextFile = p;
+			p->fileCreateTime = tmp;
+			p->fileAlterTime = tmp;
+		}
+		cout<<"文件创建成功"<<endl;
+	}
+	else
+	{
+		cout<<"空目录下不能创建文件"<<endl;
+	}
+	return 1;
+
+	
+}
 //显示当前目录的文件
 int FileSystem::showFolder()
 {
@@ -285,16 +329,117 @@ int FileSystem::renameFolder()
 	return 1;
 }
 
-//
-//int FileSystem::deleteFolder()
-//{
-//
-//}
-//
-//int FileSystem::deleteFileInFolder()
-//{
-//
-//}
+//删除目录
+int FileSystem::deleteFolder()
+{
+	Folder *p = new Folder();
+	cin >> p->folderName;
+	int flag = 0;
+	if (currentFolder->folderPtr == NULL)
+	{
+		cout<<"当前目录下不存在目录"<<endl;
+	}
+	else
+	{
+		Folder *q = new Folder();
+		q = currentFolder->folderPtr;
+		if (q->nextFolder == NULL)
+		{
+			if (q->folderName == p->folderName)
+			{
+				if (q->folderPtr == NULL)
+				{
+					//删除文件
+					deleteFileInFolder(q);
+					currentFolder->folderPtr = NULL;
+				}
+				else
+				{
+					deleteFileInFolder(q);
+					delete_Folder(q->folderPtr);
+					q->folderPtr = NULL;
+					currentFolder->folderPtr = NULL;
+				}
+				flag++;
+			}
+		}
+		//下一个目录不为空
+		else
+		{
+			if (q->folderName == p->folderName)
+			{
+				flag++;
+
+				if (q->folderPtr == NULL)
+				{
+					deleteFileInFolder(q);
+					currentFolder->folderPtr = q->nextFolder;
+				}
+				else
+				{
+					deleteFileInFolder(q);
+					delete_Folder(q->folderPtr);
+					q->folderPtr = NULL;
+					currentFolder->folderPtr = q->nextFolder;
+				}
+			}
+			else
+			{
+				while (q->nextFolder!=NULL)
+				{
+					if (q->nextFolder->folderName == p->folderName)
+					{
+						if (q->nextFolder->folderPtr == NULL)
+						{
+							deleteFileInFolder(q->nextFolder);
+							q->nextFolder = q->nextFolder->nextFolder;
+						}
+						else
+						{
+							deleteFileInFolder(q->nextFolder);
+							delete_Folder(q->nextFolder->folderPtr);
+							q->nextFolder->folderPtr = NULL;
+							q->nextFolder = q->nextFolder->nextFolder;
+						}
+						flag++;
+						break;
+					}
+					q = q->nextFolder;
+				}
+			}
+		}
+		if (flag)
+		{
+			cout<<"目录删除成功！"<<endl;
+		}
+		else 
+		{
+			cout<<"目录不存在！"<<endl;
+		}
+	}
+	return 1;
+}
+int FileSystem::deleteFileInFolder(Folder *Folder)
+{
+	if (Folder->filePtr != NULL)
+	{
+		Folder->filePtr = NULL;
+	}
+	return 1;
+}
+int FileSystem::delete_Folder(Folder *Folder)
+{
+	if (Folder->folderPtr!=NULL)
+	{
+		delete_Folder(Folder->folderPtr);
+	}
+	if (Folder->nextFolder!=NULL)
+	{
+		delete_Folder(Folder->nextFolder);
+	}
+	delete Folder;
+	return 1;
+}
 //
 //
 //int FileSystem::deleteFile()

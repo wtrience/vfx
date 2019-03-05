@@ -17,9 +17,8 @@ public:
 	int pasteFolder();
 	int subPasteFolder(Folder *folder1, Folder *folder2);
 	Folder* goback();
-	int deleteAllFolder(Folder *Folder);
-	int deleteFileInFolder();
-
+	int deleteFileInFolder(Folder *Folder);
+	int delete_Folder(Folder *Folder);
 
 	//文件
 	int newFile();
