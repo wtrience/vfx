@@ -8,7 +8,11 @@ public:
 	FileSystem();
 	~FileSystem();
 
-	//鐩綍
+	//导出导入
+	int saveCmd();
+	int loadCmd();
+
+	//目录
 	Folder* newFolder();
 	int deleteFolder();
 	Folder* openFolder();
@@ -20,7 +24,7 @@ public:
 	int deleteFileInFolder(Folder *Folder);
 	int delete_Folder(Folder *Folder);
 
-	//鏂囦欢
+	//文件
 	int newFile();
 	int deleteFile();
 	// int readFile();

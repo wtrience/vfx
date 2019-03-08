@@ -33,35 +33,43 @@ void Command::CommandWindows()
 				fs.showFolder();
 			else if (s == "cd")
 				fs.openFolder();
+			else if (s == "back")
+				fs.goback();
 			else if (s == "renamedir")
 				fs.renameFolder();
 			else if (s == "rmdir")
 				fs.deleteFolder();
-			/*
 			else if (s == "mk")
 				fs.newFile();
-
-
-			
-			else if (s == "back")
-				fs.goback();
-			else if (s == "exit")
-				exit(0);
-
-
-			else if (s == "rm")
-				fs.deleteFile();
-
 			else if (s == "renamefile")
 				fs.renameFile();
-			else if (s == "copydir")
-				fs.copyFolder();
-			else if (s == "pastedir")
-				fs.pasteFolder();
+			else if (s == "rm")
+				fs.deleteFile();
 			else if (s == "copyfile")
 				fs.copyFile();
 			else if (s == "pastefile")
 				fs.pasteFile();
+			else if(s == "save")
+				fs.saveCmd();
+			else if (s == "load")
+				fs.loadCmd();
+			/*
+
+
+
+			
+
+			else if (s == "exit")
+				exit(0);
+
+
+
+
+			else if (s == "copydir")
+				fs.copyFolder();
+			else if (s == "pastedir")
+				fs.pasteFolder();
+
 					*/
 			else  if (s == "help" || s == "h")
 			{
@@ -69,7 +77,7 @@ void Command::CommandWindows()
 			}
 			else
 			{
-				cout << "鎵句笉鍒板搴斿懡浠わ紝璇峰弬鐪媆"help\"" << endl;
+				cout << "找不到对应命令，请参看\"help\"" << endl;
 			}
 		
 			fs.display();
@@ -82,13 +90,13 @@ void Command::CommandWindows()
 
 void Command::Help()
 {
-	cout<< "dir    | 鍒楀嚭褰撳墠鐩綍涓嬬殑鐩綍鍜屾枃浠禱n"
-		<< "mkdir  | 鍒涘缓鐩綍\n"
+	cout<< "dir    | 列出当前目录下的目录和文件\n"
+		<< "mkdir  | 创建目录\n"
 		<< "rd     |"
-		<< "cd     | 鍒囨崲褰撳墠鐩綍\n"
+		<< "cd     | 切换当前目录\n"
 		<< "del    | "
-		<< "copy   | 鎷疯礉鏂囦欢\n"
-		<< "rename | 閲嶅懡鍚峔n"
+		<< "copy   | 拷贝文件\n"
+		<< "rename | 重命名\n"
 		<< "move   |"
 		<< "mklink |"
 		<< "save   |"

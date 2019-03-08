@@ -1,6 +1,7 @@
 #include <iostream>
 #include "fileSystem.h"
 #include "command.h"
+#include <fstream>
 
 using namespace std;
 

@@ -9,7 +9,7 @@
 
 using namespace std;
 
-//åˆ›å»ºæ–‡ä»¶çš„ç»“æ„ä½“
+//´´½¨ÎÄ¼şµÄ½á¹¹Ìå
 typedef struct File
 {
 	string fileCreateTime;
@@ -20,17 +20,18 @@ typedef struct File
 	string fileContent;
 	bool rw;
 
-	File()//åˆå§‹åŒ–
+	File()//³õÊ¼»¯
 	{
 		fileCreateTime = "";
 		fileAlterTime = "";
 		fileSize = 0;
 		nextFile = NULL;
 		fileContent = "";
+		rw = false;
 	}
 }File;
 
-//åˆ›å»ºæ–‡ä»¶å¤¹çš„ç»“æ„ä½“
+//´´½¨ÎÄ¼ş¼ĞµÄ½á¹¹Ìå
 typedef struct Folder
 {
 	string folderCreateTime;
@@ -42,7 +43,7 @@ typedef struct Folder
 	File *filePtr;
 	Folder *folderPtr;
 
-	Folder()//åˆå§‹åŒ–
+	Folder()//³õÊ¼»¯
 	{
 		folderCreateTime = "";
 		folderAlterTime = "";
@@ -53,7 +54,7 @@ typedef struct Folder
 		folderPtr = NULL;
 	}
 
-	Folder(string time, string name, int size, Folder *nextfolder, Folder *prefolder, File *fileptr, Folder *folderptr)//èµ‹å€¼
+	Folder(string time, string name, int size, Folder *nextfolder, Folder *prefolder, File *fileptr, Folder *folderptr)//¸³Öµ
 	{
 		folderCreateTime = time;
 		folderName = name;
