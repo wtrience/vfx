@@ -4,6 +4,11 @@
 
 #include<fstream>
 
+#include<vector>
+#include<string>
+
+using namespace std;
+
 #pragma warning( disable : 4996 )
 
 FileSystem::FileSystem()
@@ -23,7 +28,7 @@ FileSystem::~FileSystem()
 	delete tempfolder;
 }
 
-//–¬Ω®ƒø¬º
+//Êñ∞Âª∫ÁõÆÂΩï
 Folder* FileSystem::newFolder()
 {
 	time_t t = time(0);
@@ -42,17 +47,17 @@ Folder* FileSystem::newFolder()
 			p->folderCreateTime = tmp;
 			p->folderAlterTime = tmp;
 		}
-		else//∏√ƒø¬ºœ¬ƒø¬º¡¥±Ì÷∏’Î≤ªŒ™ø’
+		else//ËØ•ÁõÆÂΩï‰∏ãÁõÆÂΩïÈìæË°®ÊåáÈíà‰∏ç‰∏∫Á©∫
 		{
-			//∏√÷∏’Î”√”⁄±È¿˙
+			//ËØ•ÊåáÈíàÁî®‰∫éÈÅçÂéÜ
 			Folder *q;
 			q = currentFolder->folderPtr;
 			while (q->nextFolder != NULL)
 			{
-				if (!strcmp(p->folderName.c_str(), q->folderName.c_str()))//Œƒº˛º–Õ¨√˚
+				if (!strcmp(p->folderName.c_str(), q->folderName.c_str()))//Êñá‰ª∂Â§πÂêåÂêç
 				{
-					cout << "Õ¨º∂ƒø¬º≤ªƒ‹÷ÿ√˚£°" << endl;
-					cout << "Õ¨º∂ƒø¬º≤ªƒ‹÷ÿ√˚999£°" << endl;
+					cout << "ÂêåÁ∫ßÁõÆÂΩï‰∏çËÉΩÈáçÂêçÔºÅ" << endl;
+					cout << "ÂêåÁ∫ßÁõÆÂΩï‰∏çËÉΩÈáçÂêç999ÔºÅ" << endl;
 					return 0;
 				}
 
@@ -60,7 +65,7 @@ Folder* FileSystem::newFolder()
 			}
 			if (!strcmp(p->folderName.c_str(), q->folderName.c_str()))
 			{
-				cout << "Õ¨º∂ƒø¬º≤ªƒ‹÷ÿ√˚£°" << endl;
+				cout << "ÂêåÁ∫ßÁõÆÂΩï‰∏çËÉΩÈáçÂêçÔºÅ" << endl;
 				return 0;
 			}
 			q->nextFolder = p;
@@ -68,17 +73,17 @@ Folder* FileSystem::newFolder()
 			p->folderCreateTime = tmp;
 			p->folderAlterTime = tmp;
 		}
-		cout << "ƒø¬º¥¥Ω®≥…π¶£°" << endl;
+		cout << "ÁõÆÂΩïÂàõÂª∫ÊàêÂäüÔºÅ" << endl;
 	}
 	else
 	{
-		cout << "≤ªƒ‹‘⁄ø’ƒø¬ºœ¬¥¥Ω®Œƒº˛!£°" << endl;
+		cout << "‰∏çËÉΩÂú®Á©∫ÁõÆÂΩï‰∏ãÂàõÂª∫Êñá‰ª∂!ÔºÅ" << endl;
 	}
 	return currentFolder;
 
 }
 
-//–¬Ω®Œƒº˛
+//Êñ∞Âª∫Êñá‰ª∂
 int FileSystem::newFile()
 {
 	time_t t = time(0);
@@ -89,7 +94,7 @@ int FileSystem::newFile()
 	cin >> p->fileName;
 	if (currentFolder != NULL)
 	{
-		//ºÏ≤È”–ŒﬁÕ¨√˚
+		//Ê£ÄÊü•ÊúâÊó†ÂêåÂêç
 		if (currentFolder->filePtr==NULL)
 		{
 			currentFolder->filePtr = p;
@@ -104,31 +109,31 @@ int FileSystem::newFile()
 			{
 				if (!strcmp(p->fileName.c_str(),q->fileName.c_str()))
 				{
-					cout<<"∏√Œƒº˛“—¥¥Ω®£¨Œﬁ–Ë÷ÿ–¬¥¥Ω®"<<endl;
+					cout<<"ËØ•Êñá‰ª∂Â∑≤ÂàõÂª∫ÔºåÊó†ÈúÄÈáçÊñ∞ÂàõÂª∫"<<endl;
 					return 0;
 				}
 				q = q->nextFile;
 			}
 			if (!strcmp(p->fileName.c_str(), q->fileName.c_str()))
 			{
-				cout << "∏√Œƒº˛“—¥¥Ω®£¨Œﬁ–Ë÷ÿ–¬¥¥Ω®" << endl;
+				cout << "ËØ•Êñá‰ª∂Â∑≤ÂàõÂª∫ÔºåÊó†ÈúÄÈáçÊñ∞ÂàõÂª∫" << endl;
 				return 0;
 			}
 			q->nextFile = p;
 			p->fileCreateTime = tmp;
 			p->fileAlterTime = tmp;
 		}
-		cout<<"Œƒº˛¥¥Ω®≥…π¶"<<endl;
+		cout<<"Êñá‰ª∂ÂàõÂª∫ÊàêÂäü"<<endl;
 	}
 	else
 	{
-		cout<<"ø’ƒø¬ºœ¬≤ªƒ‹¥¥Ω®Œƒº˛"<<endl;
+		cout<<"Á©∫ÁõÆÂΩï‰∏ã‰∏çËÉΩÂàõÂª∫Êñá‰ª∂"<<endl;
 	}
 	return 1;
 
 	
 }
-//œ‘ æµ±«∞ƒø¬ºµƒŒƒº˛
+//ÊòæÁ§∫ÂΩìÂâçÁõÆÂΩïÁöÑÊñá‰ª∂
 int FileSystem::showFolder()
 {
 	int folderSize = 0, fileSize = 0;
@@ -140,28 +145,26 @@ int FileSystem::showFolder()
 	string str;
 	if (d == NULL && f == NULL)
 	{
-		cout << "ø’ƒø¬º" << endl;
+		cout << "Á©∫ÁõÆÂΩï" << endl;
 		return 0;
 	}
 	Folder *d1 = new Folder();
 	File *d2 = new File();
 
-	//±È¿˙µ±«∞ƒø¬º
-	//cout << endl;
-	//cout << endl;
+	//ÈÅçÂéÜÂΩìÂâçÁõÆÂΩï
 	while (d!=NULL)
 	{
 		d1 = d->folderPtr;
 		d2 = d->filePtr;
 		while (d1!=NULL)
 		{
-			//ƒø¬º∏ˆ ˝
+			//ÁõÆÂΩï‰∏™Êï∞
 			folderSize++;
 			d1 = d1->nextFolder;
 		}
 		while (d2!=NULL)
 		{
-			//Œƒº˛∏ˆ ˝
+			//Êñá‰ª∂‰∏™Êï∞
 			fileSize++;
 			d2 = d2->nextFile;
 		}
@@ -175,7 +178,7 @@ int FileSystem::showFolder()
 
 	}
 	//cout << endl;
-	//cout << " Œƒº˛√˚≥∆      " << "Œƒº˛¥Û–°         " << "Œƒº˛ƒ⁄»›           " << "¥¥Ω® ±º‰           " << "Œƒº˛ Ù–‘";
+	//cout << " Êñá‰ª∂ÂêçÁß∞      " << "Êñá‰ª∂Â§ßÂ∞è         " << "Êñá‰ª∂ÂÜÖÂÆπ           " << "ÂàõÂª∫Êó∂Èó¥           " << "Êñá‰ª∂Â±ûÊÄß";
 	//cout << endl;
 
 	while (f!=NULL)
@@ -184,10 +187,10 @@ int FileSystem::showFolder()
 		str = buf;
 		if (f->rw)
 			cout << f->fileCreateTime.substr(0, 10) << "  " << f->fileCreateTime.substr(11, 5) << "         " << string(10 - str.length(), ' ') << f->fileSize << " " << f->fileName << string(14 - (f->fileName.length()), ' ') << endl;
-			//cout << "    " << f->fileName << string(15 - (f->fileName.length()), ' ') << f->fileSize << string(18 - f->fileContent.length(), ' ') << f->fileContent << string(10 - str.length(), ' ') << f->fileCreateTime << "     ÷ª∂¡" << endl;
+			//cout << "    " << f->fileName << string(15 - (f->fileName.length()), ' ') << f->fileSize << string(18 - f->fileContent.length(), ' ') << f->fileContent << string(10 - str.length(), ' ') << f->fileCreateTime << "     Âè™ËØª" << endl;
 		else
 			cout << f->fileCreateTime.substr(0, 10) << "  " << f->fileCreateTime.substr(11, 5) << "         " << string(10 - str.length(), ' ') << f->fileSize << " " << f->fileName << string(14 - (f->fileName.length()), ' ') << endl;
-			//cout << "    " << f->fileName << string(15 - (f->fileName.length()), ' ') << f->fileSize << string(18 - f->fileContent.length(), ' ') << f->fileContent << string(10 - str.length(), ' ') << f->fileCreateTime << "    ø…∂¡ø…–¥" << endl;
+			//cout << "    " << f->fileName << string(15 - (f->fileName.length()), ' ') << f->fileSize << string(18 - f->fileContent.length(), ' ') << f->fileContent << string(10 - str.length(), ' ') << f->fileCreateTime << "    ÂèØËØªÂèØÂÜô" << endl;
 		f = f->nextFile;
 	}
 	return 1;
@@ -210,13 +213,13 @@ Folder* FileSystem::openFolder()
 	{
 		if (currentFolder == NULL)
 		{
-			cout << "œµÕ≥’“≤ªµΩ÷∏∂®¬∑æ∂°£" << endl;
+			cout << "Á≥ªÁªüÊâæ‰∏çÂà∞ÊåáÂÆöË∑ØÂæÑ„ÄÇ" << endl;
 		}
 		else
 		{
 			if (currentFolder->folderPtr == NULL)
 			{
-				cout << "œµÕ≥’“≤ªµΩ÷∏∂®¬∑æ∂°£" << endl;
+				cout << "Á≥ªÁªüÊâæ‰∏çÂà∞ÊåáÂÆöË∑ØÂæÑ„ÄÇ" << endl;
 			}
 			else
 			{
@@ -235,7 +238,7 @@ Folder* FileSystem::openFolder()
 
 				if (!flag)
 				{
-					cout << "œµÕ≥’“≤ªµΩ÷∏∂®¬∑æ∂°£" << endl;
+					cout << "Á≥ªÁªüÊâæ‰∏çÂà∞ÊåáÂÆöË∑ØÂæÑ„ÄÇ" << endl;
 				}
 			}
 		}
@@ -245,7 +248,7 @@ Folder* FileSystem::openFolder()
 	
 }
 
-//∑µªÿ…œ“ª≤„
+//ËøîÂõû‰∏ä‰∏ÄÂ±Ç
 Folder* FileSystem::goback()
 {
 	int flag = 0;
@@ -253,7 +256,7 @@ Folder* FileSystem::goback()
 	{
 		if (currentFolder==root)
 		{
-			cout<<"Œﬁƒø¬º∑µªÿ"<<endl;
+			cout<<"Êó†ÁõÆÂΩïËøîÂõû"<<endl;
 		}
 		else
 		{
@@ -262,7 +265,7 @@ Folder* FileSystem::goback()
 	}
 	else
 	{
-		cout<<"Œﬁƒø¬º∑µªÿ"<<endl;
+		cout<<"Êó†ÁõÆÂΩïËøîÂõû"<<endl;
 	}
 	return currentFolder;
 }
@@ -300,7 +303,7 @@ void FileSystem::display()
 	v.clear();
 
 }
-//ƒø¬º÷ÿ√¸√˚
+//ÁõÆÂΩïÈáçÂëΩÂêç
 int FileSystem::renameFolder()
 {
 	time_t t = time(0);
@@ -313,7 +316,7 @@ int FileSystem::renameFolder()
 	cin >> q->folderName;
 	int flag = 0, flag1 = 0;
 	if (currentFolder->folderPtr == NULL)
-		cout << "µ±«∞¬∑æ∂œ¬≤ª¥Ê‘⁄ƒø¬º!" << endl;
+		cout << "ÂΩìÂâçË∑ØÂæÑ‰∏ã‰∏çÂ≠òÂú®ÁõÆÂΩï!" << endl;
 	else
 	{
 		Folder *ptr = new Folder();
@@ -346,19 +349,19 @@ int FileSystem::renameFolder()
 		}
 
 		if (!flag)
-			cout << "≤ª¥Ê‘⁄÷∏∂®“™÷ÿ√¸√˚µƒƒø¬º!" << endl;
+			cout << "‰∏çÂ≠òÂú®ÊåáÂÆöË¶ÅÈáçÂëΩÂêçÁöÑÁõÆÂΩï!" << endl;
 		if (flag)
 		{
 			if (flag1)
-				cout << "¥Ê‘⁄“ª∏ˆ÷ÿ√˚Œƒº˛°£" << endl;
+				cout << "Â≠òÂú®‰∏Ä‰∏™ÈáçÂêçÊñá‰ª∂„ÄÇ" << endl;
 			else
-				cout << "ƒø¬º÷ÿ√¸√˚≥…π¶£°" << endl;
+				cout << "ÁõÆÂΩïÈáçÂëΩÂêçÊàêÂäüÔºÅ" << endl;
 		}
 	}
 	return 1;
 }
 
-//…æ≥˝ƒø¬º
+//Âà†Èô§ÁõÆÂΩï
 int FileSystem::deleteFolder()
 {
 	Folder *p = new Folder();
@@ -366,7 +369,7 @@ int FileSystem::deleteFolder()
 	int flag = 0;
 	if (currentFolder->folderPtr == NULL)
 	{
-		cout<<"µ±«∞ƒø¬ºœ¬≤ª¥Ê‘⁄ƒø¬º"<<endl;
+		cout<<"ÂΩìÂâçÁõÆÂΩï‰∏ã‰∏çÂ≠òÂú®ÁõÆÂΩï"<<endl;
 	}
 	else
 	{
@@ -378,7 +381,7 @@ int FileSystem::deleteFolder()
 			{
 				if (q->folderPtr == NULL)
 				{
-					//…æ≥˝Œƒº˛
+					//Âà†Èô§Êñá‰ª∂
 					deleteFileInFolder(q);
 					currentFolder->folderPtr = NULL;
 				}
@@ -392,7 +395,7 @@ int FileSystem::deleteFolder()
 				flag++;
 			}
 		}
-		//œ¬“ª∏ˆƒø¬º≤ªŒ™ø’
+		//‰∏ã‰∏Ä‰∏™ÁõÆÂΩï‰∏ç‰∏∫Á©∫
 		else
 		{
 			if (q->folderName == p->folderName)
@@ -439,11 +442,11 @@ int FileSystem::deleteFolder()
 		}
 		if (flag)
 		{
-			cout<<"ƒø¬º…æ≥˝≥…π¶£°"<<endl;
+			cout<<"ÁõÆÂΩïÂà†Èô§ÊàêÂäüÔºÅ"<<endl;
 		}
 		else 
 		{
-			cout<<"ƒø¬º≤ª¥Ê‘⁄£°"<<endl;
+			cout<<"ÁõÆÂΩï‰∏çÂ≠òÂú®ÔºÅ"<<endl;
 		}
 	}
 	return 1;
@@ -470,7 +473,7 @@ int FileSystem::delete_Folder(Folder *Folder)
 	return 1;
 }
 
-//…æ≥˝Œƒº˛
+//Âà†Èô§Êñá‰ª∂
 int FileSystem::deleteFile()
 {
 	File *p = new File();
@@ -478,7 +481,7 @@ int FileSystem::deleteFile()
 	int flag = 0;
 	if (currentFolder->filePtr==NULL)
 	{
-		cout<<"µ±«∞ƒø¬ºœ¬≤ª¥Ê‘⁄Œƒº˛"<<endl;
+		cout<<"ÂΩìÂâçÁõÆÂΩï‰∏ã‰∏çÂ≠òÂú®Êñá‰ª∂"<<endl;
 	}
 	else
 	{
@@ -514,13 +517,13 @@ int FileSystem::deleteFile()
 			}
 		}
 		if (flag)
-			cout << "Œƒº˛…æ≥˝≥…π¶" << endl;
+			cout << "Êñá‰ª∂Âà†Èô§ÊàêÂäü" << endl;
 		else
-			cout<<"≤ª¥Ê‘⁄∏√Œƒº˛"<<endl;
+			cout<<"‰∏çÂ≠òÂú®ËØ•Êñá‰ª∂"<<endl;
 	}
 	return 1;
 }
-//Œƒº˛÷ÿ√¸√˚
+//Êñá‰ª∂ÈáçÂëΩÂêç
 int FileSystem::renameFile()
 {
 	time_t t = time(0);
@@ -534,7 +537,7 @@ int FileSystem::renameFile()
 
 	int flag = 0, flag1 = 0;
 	if (currentFolder->filePtr == NULL)
-		cout<<"’“≤ªµΩ÷∏∂®Œƒº˛"<<endl;
+		cout<<"Êâæ‰∏çÂà∞ÊåáÂÆöÊñá‰ª∂"<<endl;
 	else
 	{
 		File *ptr = new File();
@@ -569,22 +572,22 @@ int FileSystem::renameFile()
 		{
 			if (flag1)
 			{
-				cout<< "Œƒº˛÷ÿ√¸√˚ ß∞‹" <<endl;
+				cout<< "Êñá‰ª∂ÈáçÂëΩÂêçÂ§±Ë¥•" <<endl;
 			}
 			else
 			{
-				cout<<"Œƒº˛÷ÿ√¸√˚≥…π¶"<<endl;
+				cout<<"Êñá‰ª∂ÈáçÂëΩÂêçÊàêÂäü"<<endl;
 			}
 		}
 		else
 		{
-			cout << "÷ÿ√¸√˚Œƒº˛≤ª¥Ê‘⁄" << endl;
+			cout << "ÈáçÂëΩÂêçÊñá‰ª∂‰∏çÂ≠òÂú®" << endl;
 		}
 	}
 
 	return 1;
 }
-//øΩ±¥Œƒº˛
+//Êã∑Ë¥ùÊñá‰ª∂
 int FileSystem::copyFile()
 {
 	File *p = new File();
@@ -592,7 +595,7 @@ int FileSystem::copyFile()
 	int flag = 0;
 	tempfile = new File();
 	if (currentFolder->filePtr == NULL)
-		cout << "µ±«∞¬∑æ∂œ¬≤ª¥Ê‘⁄Œƒº˛!" << endl;
+		cout << "ÂΩìÂâçË∑ØÂæÑ‰∏ã‰∏çÂ≠òÂú®Êñá‰ª∂!" << endl;
 	else
 	{
 		File *q = new File();
@@ -616,24 +619,24 @@ int FileSystem::copyFile()
 			flag++;
 		}
 		if (flag)
-			cout << "Œƒº˛∏¥÷∆≥…π¶£°" << endl;
+			cout << "Êñá‰ª∂Â§çÂà∂ÊàêÂäüÔºÅ" << endl;
 		else
-			cout << "≤ª¥Ê‘⁄÷∏∂®“™∏¥÷∆µƒŒƒº˛!" << endl;
+			cout << "‰∏çÂ≠òÂú®ÊåáÂÆöË¶ÅÂ§çÂà∂ÁöÑÊñá‰ª∂!" << endl;
 	}
 
 	return 1;
 
 }
-//’≥Ã˘Œƒº˛
+//Á≤òË¥¥Êñá‰ª∂
 int FileSystem::pasteFile()
 {
 	int flag = 0;
 	if (tempfile == NULL)
 	{
-		cout << "∏¥÷∆Œƒº˛≤ª¥Ê‘⁄£¨’≥Ã˘ ß∞‹!" << endl;
+		cout << "Â§çÂà∂Êñá‰ª∂‰∏çÂ≠òÂú®ÔºåÁ≤òË¥¥Â§±Ë¥•!" << endl;
 		return 0;
 	}
-	//1.∏¥÷∆¡À 2.µ±«∞fileptrø’µƒ£¨÷±Ω”pasteΩ¯¿¥
+	//1.Â§çÂà∂‰∫Ü 2.ÂΩìÂâçfileptrÁ©∫ÁöÑÔºåÁõ¥Êé•pasteËøõÊù•
 	if (currentFolder->filePtr == NULL)
 	{
 		currentFolder->filePtr = new File();
@@ -641,7 +644,7 @@ int FileSystem::pasteFile()
 		currentFolder->filePtr->fileContent = tempfile->fileContent;
 		currentFolder->filePtr->fileName = tempfile->fileName;
 		currentFolder->filePtr->fileSize = tempfile->fileSize;
-		cout << "’≥Ã˘Œƒº˛≥…π¶!" << endl;
+		cout << "Á≤òË¥¥Êñá‰ª∂ÊàêÂäü!" << endl;
 	}
 	else
 	{
@@ -657,13 +660,13 @@ int FileSystem::pasteFile()
 				break;
 			}
 			q = q->nextFile;
-			//ºÏ—È ∏¯flag
+			//Ê£ÄÈ™å Áªôflag
 			if (q->nextFile == NULL && q->fileName == tempfile->fileName)
 			{
 				flag++;
 			}
 		}
-		//≈–∂œ¡¥±Ìµ⁄“ª∏ˆŒƒº˛ «∑Ò”Î“™’≥Ã˘µƒÕ¨√˚
+		//Âà§Êñ≠ÈìæË°®Á¨¨‰∏Ä‰∏™Êñá‰ª∂ÊòØÂê¶‰∏éË¶ÅÁ≤òË¥¥ÁöÑÂêåÂêç
 		if (currentFolder->filePtr->fileName == tempfile->fileName)
 		{
 			flag++;
@@ -671,17 +674,17 @@ int FileSystem::pasteFile()
 
 		if (!flag)
 		{
-			//◊Ó∫ÛΩ⁄µ„Ωª∏¯temp
+			//ÊúÄÂêéËäÇÁÇπ‰∫§Áªôtemp
 			q->nextFile = new File();
 			q->nextFile->fileCreateTime = tempfile->fileCreateTime;
 			q->nextFile->fileContent = tempfile->fileContent;
 			q->nextFile->fileName = tempfile->fileName;
 			q->nextFile->fileSize = tempfile->fileSize;
-			cout << "Œƒº˛’≥Ã˘≥…π¶£°" << endl;
+			cout << "Êñá‰ª∂Á≤òË¥¥ÊàêÂäüÔºÅ" << endl;
 
 		}
 		else
-			cout << "µ±«∞Œƒº˛“—¥Ê‘⁄!" << endl;
+			cout << "ÂΩìÂâçÊñá‰ª∂Â∑≤Â≠òÂú®!" << endl;
 	}
 
 
@@ -704,12 +707,11 @@ int FileSystem::saveCmd()
 		f = root->filePtr;
 		char buf[10]="___";
 
-		//±È¿˙ƒø¬º
+		//ÈÅçÂéÜÁõÆÂΩï
 		while (d != NULL)
 		{
-			out << "dir"<<buf<< d->folderName <<buf<< d->folderCreateTime <<"\n";
+			out << "dir"<<buf<<"folderName"<< d->folderName <<buf<< d->folderCreateTime <<"\n";
 			d = d->nextFolder;
-
 		}
 		while (f != NULL)
 		{
@@ -722,12 +724,30 @@ int FileSystem::saveCmd()
 
 }
 
+
+vector<string> splitStr(string& str, string& delimiter)
+{
+	vector<string> v;
+
+	size_t pos = 0;
+	std::string token;
+	while ((pos = str.find(delimiter)) != std::string::npos) {
+		token = str.substr(0, pos);
+		v.push_back(token);
+		str.erase(0, pos + delimiter.length());
+	}
+	v.push_back(str);
+	return v;
+}
+
 int FileSystem::loadCmd()
 {
-	char tmp[64];
+	string tmp;
 	cin >> tmp;
 	ifstream in(tmp);
 
+
+	string split="___";
 	string line;
 	vector<string> v;
 
@@ -738,22 +758,26 @@ int FileSystem::loadCmd()
 	}
 	while (!in.eof())
 	{
-		while (getline(in,line))
+		while (getline(in, line))
 		{
+			vector<string> v = splitStr(line, split);
+			Folder *p = new Folder();
+			p->folderName = v[1];
+			p->folderCreateTime = v[2];
+			p->folderAlterTime = v[2];
+			p->preFolder=currentFolder;
+			
+
+
 			cout << line << endl;
+
+			//in.getline(buffer, 100);
+			//cout << buffer << endl;
 		}
-
-
-
-
-
-		//in.getline(buffer, 100);
-		//cout << buffer << endl;
 	}
 	in.close();
 	return 1;
 }
-
 
 //
 //int FileSystem::copyFolder()
@@ -775,4 +799,3 @@ int FileSystem::loadCmd()
 //{
 //
 //}
-
